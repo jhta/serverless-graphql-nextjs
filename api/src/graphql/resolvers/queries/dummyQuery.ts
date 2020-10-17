@@ -10,7 +10,7 @@ async function dummyQuery(
 
   return {
     firstItem: "hello",
-    secondItem: "from lambda :D ",
+    secondItem: "from lambda my friend",
   };
 }
 
