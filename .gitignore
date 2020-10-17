@@ -14,3 +14,5 @@ jspm_packages
 
 # Webpack directories
 .webpack
+.next
+.serverless_nextjs
