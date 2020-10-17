@@ -28,7 +28,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install dependencies"
       - run: npm install serverless-offline
       - run: cd api && npm ci
 
