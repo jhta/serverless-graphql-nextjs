@@ -6,7 +6,9 @@
   "scripts": {
     "deploy": "serverless deploy",
     "dev": "serverless offline",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default",
+    "test:ci": "npx jest --ci --runInBand --silent --colors --coverage"
   },
   "dependencies": {
     "apollo-server-lambda": "^2.16.1",
