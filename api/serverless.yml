@@ -7,10 +7,23 @@ plugins:
   - serverless-offline
   - serverless-plugin-typescript
 
+custom:
+  allowedHeaders:
+    - Accept
+    - Content-Type
+    - Content-Length
+    - Authorization
+    - X-Amz-Date
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+
 provider:
   name: aws
   runtime: nodejs12.x
-  timeout: 15
+  timeout: 5
+  region: eu-west-1
+  endpointType: regional
 
 functions:
   graphql:
@@ -19,6 +32,12 @@ functions:
       - http:
           path: graphql
           method: post
+          cors:
+            origin: "*"
+            headers: ${self:custom.allowedHeaders}
       - http:
           path: graphql
           method: get
+          cors:
+            origin: "*"
+            headers: ${self:custom.allowedHeaders}

@@ -1,16 +1,16 @@
-import { IDummyObject, IDummyQueryArgs } from '../typings';
+import { IDummyObject, IDummyQueryArgs } from "../typings";
 
 async function dummyQuery(
   _: any,
-  args: IDummyQueryArgs,
+  args: IDummyQueryArgs
 ): Promise<IDummyObject> {
   const { itemId } = args;
 
   console.log(`Query object with id ${itemId}`);
 
   return {
-    firstItem: 'first',
-    secondItem: 'second',
+    firstItem: "hello",
+    secondItem: "from lambda :D ",
   };
 }
 
