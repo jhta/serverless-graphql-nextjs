@@ -21,19 +21,22 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
 
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm install serverless-offline
-      - run: cd api && npm ci
+      - name: Install dependencies
+        run: cd api && npm ci
 
-      - name: Deploy api to serverless
-      - run: npm i -g serverless@2.1.0
-      - run: cd api && serverless deploy
+      - name: install serverless
+        run: npm i -g serverless@2.1.0
+
+      - name: Deploy to AWS
+        run: cd api && serverless deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
