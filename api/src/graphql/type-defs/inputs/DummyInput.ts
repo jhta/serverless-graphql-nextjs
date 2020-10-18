@@ -3,4 +3,9 @@ export default `
     firstInput: String!
     secondInput: String!
   }
+
+  input ExperienceInput {
+    userId: ID!
+    energy: Int!
+  }
 `;

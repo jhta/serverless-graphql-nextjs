@@ -3,4 +3,9 @@ export default `
     firstItem: String!
     secondItem: String!
   }
+
+  type Experience {
+    userId: ID!
+    energy: Int!
+  }
 `;

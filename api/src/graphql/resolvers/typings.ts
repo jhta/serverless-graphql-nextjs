@@ -3,6 +3,14 @@ export interface IDummyObject {
   secondItem: string;
 }
 
+export interface IExperience {
+  userId: string;
+  energy: number;
+}
+export interface IExperienceMutationArgs {
+  input: IExperience;
+}
+
 export interface IDummyQueryArgs {
   itemId: string;
 }

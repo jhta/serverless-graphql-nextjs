@@ -1,12 +1,12 @@
-import { gql } from 'apollo-server-lambda';
+import { gql } from "apollo-server-lambda";
 
 // Inputs
-import DummyInput from './inputs/DummyInput';
+import DummyInput from "./inputs/DummyInput";
 // Objects
-import DummyObject from './objects/DummyObject';
+import DummyObject from "./objects/DummyObject";
 // Root types
-import Mutation from './root/Mutation'; // tslint:disable-line ordered-imports
-import Query from './root/Query'; // tslint:disable-line ordered-imports
+import Mutation from "./root/Mutation"; // tslint:disable-line ordered-imports
+import Query from "./root/Query"; // tslint:disable-line ordered-imports
 
 const typeDefStrings = [
   // Inputs
@@ -18,6 +18,37 @@ const typeDefStrings = [
   Query,
 ];
 
-const typeDefs = typeDefStrings.map(typeDef => gql(typeDef));
+const typeDef = gql`
+  input DummyInput {
+    firstInput: String!
+    secondInput: String!
+  }
 
-export default typeDefs;
+  input ExperienceInput {
+    userId: ID!
+    energy: Int!
+  }
+
+  type DummyObject {
+    firstItem: String!
+    secondItem: String!
+  }
+
+  type Experience {
+    userId: ID!
+    energy: Int!
+  }
+
+  type Mutation {
+    postExperience(input: ExperienceInput!): Experience!
+    dummyMutation(input: DummyInput!): Boolean!
+  }
+
+  type Query {
+    dummyQuery(itemId: ID!): DummyObject!
+  }
+`;
+
+// const typeDefs = typeDefStrings.map(typeDef => gql(typeDef));
+
+export default typeDef;
