@@ -53,7 +53,7 @@ functions:
 
 resources:
   Resources:
-    UserTable:
+    ExperienceTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
