@@ -1,1 +1,1 @@
-export { default as dummyQuery } from './dummyQuery';
+export { default as getExperiencesByUserId } from "./experience";
