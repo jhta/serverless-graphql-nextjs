@@ -2,4 +2,16 @@ service: nextjs-with-aws-serverless
 frameworkVersion: '>=1.71.1'
 
 myNextApp:
-  component: serverless-next.js
+  component: "@sls-next/serverless-component@latest"
+  inputs:
+    cloudfront:
+      distributionId: E3GAWAZV70QHT5
+      # the origin-request edge lambda associated to this cache behaviour does the pages server side rendering
+      defaults:
+        forward:
+          headers:
+            [
+              CloudFront-Is-Desktop-Viewer,
+              CloudFront-Is-Mobile-Viewer,
+              CloudFront-Is-Tablet-Viewer,
+            ]

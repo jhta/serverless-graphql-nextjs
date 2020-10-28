@@ -4,7 +4,7 @@
   "description": "next.js with aws serverless deployment.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 4000",
     "build": "next build",
     "start": "next start",
     "deploy": "serverless",
@@ -18,9 +18,11 @@
     "serverless",
     "aws"
   ],
-  "author": "kimcoder",
+  "author": "jhta",
   "license": "ISC",
   "dependencies": {
+    "@reactchartjs/react-chart.js": "1.0.0-rc.2",
+    "chart.js": "2.9.4",
     "next": "9.4.0",
     "next-images": "1.4.0",
     "react": "16.13.1",
