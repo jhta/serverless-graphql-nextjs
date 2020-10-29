@@ -4,16 +4,25 @@ import { PolarArea } from '@reactchartjs/react-chart.js';
 import { gql } from '@apollo/client'
 import apolloClient from 'lib/apollo-client'
 
-const data = {
-  labels: ['Money', 'Spirituality', 'Health', 'Career', 'Love, Family', 'Social, Friends', 'Hobbies', 'Growth'],
+
+
+const createData = (experience: any) => {
+  const { labels } = experience
+
+  // labels: ['Money', 'Spirituality', 'Health', 'Career', 'Love, Family', 'Social, Friends', 'Hobbies', 'Growth'],
+  const keys =  Object.keys(labels)
+  const values = Object.values(labels)
+return  {
+  labels: keys, 
   datasets: [
     {
       label: '# of Votes',
-      data: [2, 9, 3, 5, 2, 3, 6,7],
+      data: values,
       backgroundColor: ['rgba(255, 99, 132, 0.2)', 'yellow', 'green', 'blue', 'pink', 'purple', 'red', 'gold']
     }
   ]
 };
+} 
 
 const options = {
   scale: {
@@ -21,7 +30,7 @@ const options = {
   }
 };
 
-const RadarChart = () => (
+const RadarChart = ({ experiences }: any) => (
   <>
     <div className='header'>
       <h1 className='title'>Radar Chart</h1>
@@ -34,14 +43,12 @@ const RadarChart = () => (
         </a>
       </div>
     </div>
-    <PolarArea data={data} options={options} type='polar-area' />
+    <PolarArea data={createData(experiences[0])} options={options} type='polar-area' />
   </>
 );
 
-const Index = (props: any) => {
+const Index = ({ experiences }: any) => {
   const title: string = 'Home';
-
-  console.log('this are the props', props)
 
   return (
     <>
@@ -50,7 +57,7 @@ const Index = (props: any) => {
       </Head>
       <div>
         <h1>{title}</h1>
-        <RadarChart />
+        <RadarChart experiences={experiences} />
       </div>
     </>
   );
@@ -61,7 +68,16 @@ Index.getInitialProps = async () => {
     query getExperiences {
       getExperiencesByUserId(userId: 123) {
         userId
-        energy
+        labels {
+          money
+          spirituality
+          health
+          career
+          love
+          social
+          hobbies
+          growth
+        }
       }
     }
   `
