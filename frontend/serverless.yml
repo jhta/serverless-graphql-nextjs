@@ -1,14 +1,17 @@
 service: nextjs-with-aws-serverless
 frameworkVersion: '>=1.71.1'
 
+plugins:
+  - serverless-dotenv-plugin
+
 myNextApp:
   component: "@sls-next/serverless-component@latest"
   inputs:
     description: "frontend app"
     build:
       env:
-        GRAPHQL_ENDPOINT: ${env:GRAPHQL_ENDPOINT}
-        NEXTAUTH_URL: ${env:NEXTAUTH_URL}
+        GRAPHQL_ENDPOINT: https://u7wg795908.execute-api.eu-west-1.amazonaws.com/dev/graphql
+        NEXTAUTH_URL: https://d2p83q9loxtgqc.cloudfront.net
     cloudfront:
       distributionId: E3GAWAZV70QHT5
       # the origin-request edge lambda associated to this cache behaviour does the pages server side rendering

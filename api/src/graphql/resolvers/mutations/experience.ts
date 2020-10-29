@@ -6,19 +6,20 @@ async function postExperienceMutation(
   args: IExperienceMutationArgs
 ): Promise<IExperience> {
   const {
-    input: { userId, energy },
+    input: { userId, labels },
   } = args;
 
+  const createdAt = new Date().getTime();
   try {
-    await db.post({ user_id: userId, energy });
+    await db.post({ user_id: userId, labels });
   } catch (error) {
     console.log("this is the error", error);
   }
   console.log(
-    `Mutation with inputs firstInput=${userId} and secondInput=${energy}`
+    `Mutation with inputs userId=${userId} and cratedAd=${createdAt}`
   );
 
-  return { userId, energy };
+  return { userId, createdAt: new Date().getTime(), labels };
 }
 
 export default postExperienceMutation;

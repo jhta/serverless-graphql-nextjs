@@ -1,14 +1,37 @@
 import { gql } from "apollo-server-lambda";
 
 const typeDef = gql`
+  type Labels {
+    money: Int!
+    spirituality: Int!
+    health: Int!
+    career: Int!
+    love: Int!
+    social: Int!
+    hobbies: Int!
+    growth: Int!
+  }
+
+  input LabelsInput {
+    money: Int!
+    spirituality: Int!
+    health: Int!
+    career: Int!
+    love: Int!
+    social: Int!
+    hobbies: Int!
+    growth: Int!
+  }
+
   input ExperienceInput {
     userId: ID!
-    energy: Int!
+    labels: LabelsInput!
   }
 
   type Experience {
     userId: ID!
-    energy: Int!
+    createdAt: String!
+    labels: Labels!
   }
 
   type Mutation {

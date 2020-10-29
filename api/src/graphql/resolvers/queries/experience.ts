@@ -6,22 +6,9 @@ async function getExperiencesByUserId(
   { userId }
 ): Promise<IExperience[]> {
   console.log(`Query object with id ${userId}`);
-
-  const params = {
-    KeyConditionExpression: "user_id = :uid",
-    ExpressionAttributeValues: {
-      ":uid": userId,
-    },
-    ScanIndexForward: false,
-  };
-
   try {
-    const experiences = await db.get(params);
-    const ex = experiences.map(({ energy, user_id: userId }) => ({
-      energy,
-      userId,
-    }));
-    return ex;
+    const experiences = await db.getExperiencesByUserId(userId);
+    return experiences;
   } catch (error) {
     console.log(error);
     return [];

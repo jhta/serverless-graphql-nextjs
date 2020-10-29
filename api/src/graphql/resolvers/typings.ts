@@ -1,7 +1,22 @@
 export interface IExperience {
   userId: string;
-  energy: number;
+  labels: ILabels;
+  createdAt: number;
 }
 export interface IExperienceMutationArgs {
-  input: IExperience;
+  input: {
+    userId: string;
+    labels: ILabels;
+  };
+}
+
+export interface ILabels {
+  money: number;
+  spirituality: number;
+  health: number;
+  career: number;
+  love: number;
+  social: number;
+  hobbies: number;
+  growth: number;
 }
