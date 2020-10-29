@@ -26,6 +26,7 @@ provider:
   endpointType: regional
   environment:
     EXPERIENCE_TABLE: EXPERIENCE_TABLE-${self:service}-${opt:stage, self:provider.stage}
+    COGNITO_IDENTITY_POOL: eu-west-1:7fc895e5-f7e4-41de-9571-23f83e152ba3
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -41,12 +42,14 @@ functions:
       - http:
           path: graphql
           method: post
+          # authorizer: aws_iam
           cors:
             origin: "*"
             headers: ${self:custom.allowedHeaders}
       - http:
           path: graphql
           method: get
+          # authorizer: aws_iam
           cors:
             origin: "*"
             headers: ${self:custom.allowedHeaders}
