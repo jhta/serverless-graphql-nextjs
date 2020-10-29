@@ -2,7 +2,7 @@ import { NextComponentType, NextPageContext } from 'next';
 import App from 'next/app';
 import { Router } from 'next/dist/client/router';
 import React from 'react';
-import GNB from 'src/components/GNB';
+import { Provider } from 'next-auth/client';
 
 type AppProps = {
   Component: NextComponentType<NextPageContext>
@@ -14,9 +14,10 @@ type AppProps = {
 export class CustomApp extends App<AppProps> {
   render () {
     const { Component, pageProps } = this.props;
+      const { session } = pageProps;
 
     return (
-      <>
+      <Provider session={session}>
         <div className='wrapper'>
           <style jsx={true}>{`
             .wrapper {
@@ -24,10 +25,9 @@ export class CustomApp extends App<AppProps> {
               flex-direction: column;
             }
           `}</style>
-          <GNB />
           <Component {...pageProps} />
         </div>
-      </>
+      </Provider>
     );
   }
 }
