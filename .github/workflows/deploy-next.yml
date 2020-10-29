@@ -39,5 +39,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          NEXTAUTH_URL: ${{ NEXTAUTH_URL }}
-          GRAPHQL_ENDPOINT: ${{ GRAPHQL_ENDPOINT }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}

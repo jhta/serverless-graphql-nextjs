@@ -4,6 +4,11 @@ frameworkVersion: '>=1.71.1'
 myNextApp:
   component: "@sls-next/serverless-component@latest"
   inputs:
+    description: "frontend app"
+    build:
+      env:
+        GRAPHQL_ENDPOINT: ${env:GRAPHQL_ENDPOINT}
+        NEXTAUTH_URL: ${env:NEXTAUTH_URL}
     cloudfront:
       distributionId: E3GAWAZV70QHT5
       # the origin-request edge lambda associated to this cache behaviour does the pages server side rendering
