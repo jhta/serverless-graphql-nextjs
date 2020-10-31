@@ -30,6 +30,7 @@
     "ts-loader": "^5.3.3",
     "tslint": "^5.20.0",
     "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.2.4"
   },
   "author": "Miguel Frazao (https://github.com/jmpfrazao/aws-node-typescript-apollo-lambda)",
