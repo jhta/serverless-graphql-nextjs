@@ -26,12 +26,14 @@ const typeDef = gql`
   input ExperienceInput {
     userId: ID!
     labels: LabelsInput!
+    description: String
   }
 
   type Experience {
     userId: ID!
     createdAt: String!
     labels: Labels!
+    description: String
   }
 
   type Mutation {

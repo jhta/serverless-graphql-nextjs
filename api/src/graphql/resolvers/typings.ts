@@ -2,11 +2,13 @@ export interface IExperience {
   userId: string;
   labels: ILabels;
   createdAt: number;
+  description?: string;
 }
 export interface IExperienceMutationArgs {
   input: {
     userId: string;
     labels: ILabels;
+    description?: string;
   };
 }
 
