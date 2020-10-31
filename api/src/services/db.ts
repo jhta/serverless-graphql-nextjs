@@ -8,12 +8,12 @@ const TableName = process.env.EXPERIENCE_TABLE;
 export async function post(data) {
   const Item = {
     ...data,
-    timestamp: new Date().getTime(),
+    timestamp: new Date().getTime()
   };
   await dynamoDB
     .put({
       TableName,
-      Item,
+      Item
     })
     .promise();
 
@@ -31,17 +31,18 @@ export async function getExperiencesByUserId(
   const params = {
     KeyConditionExpression: "user_id = :uid",
     ExpressionAttributeValues: {
-      ":uid": userId,
+      ":uid": userId
     },
-    ScanIndexForward: false,
+    ScanIndexForward: false
   };
 
   const data = await get(params);
+  console.log("data from the experiments", data);
   const experiments = data.map(
     ({ labels, user_id: userId, timestamp: createdAt }) => ({
       labels,
       userId,
-      createdAt,
+      createdAt
     })
   );
 
