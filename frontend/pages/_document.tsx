@@ -20,23 +20,6 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <style jsx>{`
-            body, html {
-              width: 100%;
-              height: 100%;
-              padding: 0;
-              margin: 0;
-              font-family: 'Open Sans', sans-serif;
-            }
-
-            h1, h2, p {
-              font-family: 'Open Sans', sans-serif;
-            }
-            .wrapper {
-              display: flex;
-              flex-direction: column;
-            }
-          `}</style>
       </Html>
     );
   }

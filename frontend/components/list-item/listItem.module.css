@@ -1,0 +1,17 @@
+.item {
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  background: #f8f8f8;
+  box-shadow: -1px 1px 2px #0000002e;
+}
+
+.date {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.description {
+  padding-bottom: 0.3rem;
+}

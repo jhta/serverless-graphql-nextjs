@@ -6,6 +6,7 @@ import { Provider } from 'next-auth/client';
 import StoreProvider from 'store/Provider'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from 'lib/apollo-client'
+import 'styles/global.css'
 
 type AppProps = {
   Component: NextComponentType<NextPageContext>

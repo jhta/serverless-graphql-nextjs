@@ -4,8 +4,7 @@ import { fetchExperiences } from "services/experiences";
 import { IExperience } from "interfaces/Experience";
 import Graph from "components/graph";
 import List from 'components/list'
-import Store from 'store'
-import { ACTION_NAMES, TState } from 'store/types';
+import { TState } from 'store/types';
 import { useMutation } from '@apollo/client';
 import { postExperienceMutation } from 'services/experiences/mutations';
 
@@ -15,16 +14,6 @@ type IndexProps = {
   initialState?: TState
 };
 
-// const setSelectedExperienceAction = (selectedExperience: IExperience | undefined) => {
-//   const store = React.useContext(Store);
-
-//   store.dispatch({
-//     type: ACTION_NAMES.SET_SELECTED_EXPERIENCE,
-//     payload: {
-//       selectedExperience: selectedExperience,
-//     }
-//   })
-// }
 const input = {
   userId: 123,
   description: 'This is a nice description',
@@ -40,15 +29,10 @@ const input = {
   },
 }
 
-
-
 const Index: NextPage<IndexProps> = ({ experiences }) => {
   const [postExp, data] = useMutation(postExperienceMutation)
   const handleCreateExperience = async (e: MouseEvent) => {
     e.preventDefault()
-    console.log('cifdsafadsfasdfadsfdsfs')
-    console.log(postExp)
-    // await postExperience()
     await postExp({
       variables: { input }
     })
@@ -56,7 +40,6 @@ const Index: NextPage<IndexProps> = ({ experiences }) => {
 
   return (
     <div>
-      
       <div className="container">
         <List experiences={experiences} />
         <Graph />
@@ -65,21 +48,7 @@ const Index: NextPage<IndexProps> = ({ experiences }) => {
         <h1>Create new one</h1>
         <button onClick={handleCreateExperience}>Create</button>
       </div>
-      <style jsx>{`
-        .container {
-          border: 1px solid green;
-          max-width: 1280px;
-          background: #ccc;
-          width: 100%;
-          height: 100%;
-          margin: 0 auto;
-          display: flex;
-        }
-        .list {
-          width: 30%;
-        }
-      `}</style>
-      </div>
+    </div>
   );
 };
 

@@ -30,6 +30,7 @@ export const fetchExperiences = async (): Promise<
 
     const { getExperiencesByUserId: experiences } = data
 
+    console.log('experkents', experiences)
     return {
       data: experiences,
       error: [],

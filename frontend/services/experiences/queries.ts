@@ -4,6 +4,7 @@ export const getExperiencesQuery = gql`
   query getExperiences($id: ID!) {
     getExperiencesByUserId(userId: $id) {
       userId
+      description
       createdAt
       labels {
         money
@@ -15,15 +16,6 @@ export const getExperiencesQuery = gql`
         hobbies
         growth
       }
-    }
-  }
-`
-
-export const createExperienceMutation = () => gql`
-  mutation experience($input: ExperienceInput!) {
-    postExperience(input: $input) {
-      userId
-      createdAt
     }
   }
 `
