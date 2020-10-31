@@ -18,6 +18,7 @@ export const fetchExperiences = async (): Promise<
     query getExperiences {
       getExperiencesByUserId(userId: 123) {
         userId
+        createdAt
         labels {
           money
           spirituality
@@ -34,7 +35,7 @@ export const fetchExperiences = async (): Promise<
 
   try {
     const response: ApolloQueryResult<IQueryResponse> = await client.query({
-      query
+      query,
     });
 
     console.log("this is the response", response);
@@ -45,13 +46,13 @@ export const fetchExperiences = async (): Promise<
 
     return {
       data: experiences,
-      error: []
+      error: [],
     };
   } catch (error) {
     console.log("the error", error);
     return {
       error,
-      data: []
+      data: [],
     };
   }
 };

@@ -1,7 +1,7 @@
 export interface IExperience {
   userId: string;
   labels: ILabels;
-  createdAt: number;
+  createdAt: string;
 }
 
 export interface ILabels {

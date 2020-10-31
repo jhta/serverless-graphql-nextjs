@@ -3,6 +3,7 @@ import App from 'next/app';
 import { Router } from 'next/dist/client/router';
 import React from 'react';
 import { Provider } from 'next-auth/client';
+import StoreProvider from 'store/Provider'
 
 type AppProps = {
   Component: NextComponentType<NextPageContext>
@@ -14,20 +15,17 @@ type AppProps = {
 export class CustomApp extends App<AppProps> {
   render () {
     const { Component, pageProps } = this.props;
-      const { session } = pageProps;
+      const { session, initialState } = pageProps;
 
     return (
-      <Provider session={session}>
-        <div className='wrapper'>
-          <style jsx={true}>{`
-            .wrapper {
-              display: flex;
-              flex-direction: column;
-            }
-          `}</style>
-          <Component {...pageProps} />
-        </div>
-      </Provider>
+      <StoreProvider initialState={initialState}>
+        <Provider session={session}>
+          <div className='wrapper'>
+            
+            <Component {...pageProps} />
+          </div>
+        </Provider>
+      </StoreProvider>
     );
   }
 }
