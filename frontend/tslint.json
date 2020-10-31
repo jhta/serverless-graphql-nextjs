@@ -5,6 +5,8 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "jsx-wrap-multiline": false
+    "jsx-wrap-multiline": false,
+    "import-name": false,
+    "variable-name": false
   }
 }

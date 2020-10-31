@@ -1,40 +1,69 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { NextPage } from "next";
-import Head from "next/head";
-import { fetchExperiences } from "../services/experiences";
+import { fetchExperiences } from "services/experiences";
 import { IExperience } from "interfaces/Experience";
 import Graph from "components/graph";
 import List from 'components/list'
 import Store from 'store'
 import { ACTION_NAMES, TState } from 'store/types';
+import { useMutation } from '@apollo/client';
+import { postExperienceMutation } from 'services/experiences/mutations';
 
 type IndexProps = {
   experiences: IExperience[];
-  lastExperience: IExperience | undefined;
   error: [];
   initialState?: TState
 };
 
-const setSelectedExperienceAction = (selectedExperience: IExperience | undefined) => {
-  const store = React.useContext(Store);
+// const setSelectedExperienceAction = (selectedExperience: IExperience | undefined) => {
+//   const store = React.useContext(Store);
 
-  store.dispatch({
-    type: ACTION_NAMES.SET_SELECTED_EXPERIENCE,
-    payload: {
-      selectedExperience: selectedExperience,
-    }
-  })
+//   store.dispatch({
+//     type: ACTION_NAMES.SET_SELECTED_EXPERIENCE,
+//     payload: {
+//       selectedExperience: selectedExperience,
+//     }
+//   })
+// }
+const input = {
+  userId: 123,
+  description: 'This is a nice description',
+  labels: {
+    money: 8,
+    spirituality: 5,
+    health: 10,
+    career: 8,
+    love: 7,
+    social: 10,
+    hobbies: 7,
+    growth: 10,
+  },
 }
 
+
+
 const Index: NextPage<IndexProps> = ({ experiences }) => {
+  const [postExp, data] = useMutation(postExperienceMutation)
+  const handleCreateExperience = async (e: MouseEvent) => {
+    e.preventDefault()
+    console.log('cifdsafadsfasdfadsfdsfs')
+    console.log(postExp)
+    // await postExperience()
+    await postExp({
+      variables: { input }
+    })
+  }
+
   return (
-    <>
-      <Head>
-        <title>nextjs-with-aws-serveress</title>
-      </Head>
+    <div>
+      
       <div className="container">
         <List experiences={experiences} />
         <Graph />
+      </div>
+      <div>
+        <h1>Create new one</h1>
+        <button onClick={handleCreateExperience}>Create</button>
       </div>
       <style jsx>{`
         .container {
@@ -50,7 +79,7 @@ const Index: NextPage<IndexProps> = ({ experiences }) => {
           width: 30%;
         }
       `}</style>
-      </>
+      </div>
   );
 };
 
@@ -63,7 +92,6 @@ Index.getInitialProps = async (): Promise<IndexProps> => {
       : undefined;
     return {
       experiences,
-      lastExperience,
       error,
       initialState: {
         selectedExperience: lastExperience,
@@ -73,7 +101,6 @@ Index.getInitialProps = async (): Promise<IndexProps> => {
     console.log("this is the error", error);
     return {
       experiences: [],
-      lastExperience: undefined,
       error
     };
   }

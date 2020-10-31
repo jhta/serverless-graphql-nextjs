@@ -16,7 +16,7 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   // subscriptions: {},
-  introspection: true,
+  introspection: false,
   playground: true,
   // context: {},
 });

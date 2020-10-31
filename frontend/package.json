@@ -22,7 +22,11 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "3.2.5",
+    "@apollo/react-hooks": "4.0.0",
     "@reactchartjs/react-chart.js": "1.0.0-rc.2",
+    "@types/apollo-upload-client": "14.1.0",
+    "apollo-link-error": "1.1.13",
+    "apollo-link-http": "1.5.17",
     "chart.js": "2.9.4",
     "date-fns": "2.16.1",
     "graphql": "15.4.0",
@@ -41,6 +45,7 @@
     "serverless-dotenv-plugin": "3.1.0",
     "serverless-next.js": "1.12.0-alpha.5",
     "tslint": "6.1.2",
+    "tslint-config-airbnb": "5.11.2",
     "tslint-config-prettier": "1.18.0",
     "tslint-config-standard": "9.0.0",
     "tslint-react": "5.0.0"
