@@ -1,6 +1,8 @@
 import { createContext } from 'react'
-import { TStore, TReducer, TAction } from './types'
+import { TStore } from './types'
 import { TUIPayloads, TUIState, UI_ACTION_NAMES } from './ui/types'
+import { combineReducers } from './utils'
+
 import {
   TExperiencesPayloads,
   TExperiencesState,
@@ -15,31 +17,18 @@ export type TState = {
   ui: TUIState
 }
 
+export type TActionNames = UI_ACTION_NAMES | EXPERIENCES_ACTION_NAMES
+export type TActionPayloads = TUIPayloads | TExperiencesPayloads | undefined
+
 export const initialState: TState = {
-  ui: ui.initialState,
-  experiences: experiences.initialState,
+  [ui.namespace]: ui.initialState,
+  [experiences.namespace]: experiences.initialState,
 }
 
 const reducers = {
-  ui: ui.reducers,
-  experiences: experiences.reducers,
+  [ui.namespace]: ui.reducers,
+  [experiences.namespace]: experiences.reducers,
 }
-
-// export type TMainStore = TStore<TPayloai
-type TActionNames = UI_ACTION_NAMES | EXPERIENCES_ACTION_NAMES
-type TActionPayloads = TUIPayloads | TExperiencesPayloads
-
-// type TCombinedAction = TAction<TActionNames, TActionPayloads>
-
-const combineReducers = (reducers: any) => (state: any, action: any) =>
-  Object.keys(reducers).reduce(
-    // use for..in loop, if you prefer it
-    (acc, prop) => ({
-      ...acc,
-      [prop]: reducers[prop](acc[prop], action),
-    }),
-    state
-  )
 
 export const reducer = combineReducers(reducers)
 

@@ -2,8 +2,9 @@ import ReactModal from 'react-modal'
 import React, { MouseEvent } from 'react'
 import { useMutation } from '@apollo/client';
 import { postExperienceMutation } from 'services/experiences/mutations';
-import Store from 'store'
-import { UI_ACTION_NAMES } from 'store/ui/types'
+import { isOpenModal } from 'store/selectors'
+import { hideModal as hideModalAction } from 'store/ui/actions'
+import { useSelect, useDispatch } from 'store/hooks'
 
 
 const input = {
@@ -21,27 +22,12 @@ const input = {
   },
 }
 
-const useSelectIsModalOpen = () => {
-  const { state } = React.useContext(Store);
-  return state.ui.modalIsOpen
-  
-}
-
-const useDispatchHideModal = () => {
-  const store = React.useContext(Store);
-
-  return () => store.dispatch({
-    type: UI_ACTION_NAMES.HIDE_MODAL,
-    payload: undefined,
-  })
-}
-
 ReactModal.setAppElement('#modal')
 
 const Modal = () => {
   const [postExp, data] = useMutation(postExperienceMutation)
-  const isModalOpen = useSelectIsModalOpen()
-  const hideModal = useDispatchHideModal()
+  const isModalOpen = useSelect(isOpenModal)
+  const hideModal = useDispatch(hideModalAction())
 
   const handleCreateExperience = async (e: MouseEvent) => {
     e.preventDefault()
@@ -51,7 +37,6 @@ const Modal = () => {
   }
 
   const handleCloseModal = () => {
-    console.log('hande close', hideModal)
     hideModal()
   }
 

@@ -3,32 +3,18 @@ import { PolarArea } from "@reactchartjs/react-chart.js";
 import { IExperience } from "interfaces/Experience";
 import Button from 'components/button'
 import { createData, graphOptions } from './utils'
-import { UI_ACTION_NAMES } from 'store/ui/types'
 import styles from './graph.module.css'
 
-import Store from 'store'
-
-const getSelectedExperience = () => {
-  const { state } = React.useContext(Store);
-  return state.experiences.selectedExperience
-  
-}
-
-const useDispatchShowModal = () => {
-  const { dispatch } = React.useContext(Store)
-
-  return () => dispatch({
-    type: UI_ACTION_NAMES.SHOW_MODAL,
-    payload: undefined
-  })
-}
+import { getSelectedExperience } from 'store/selectors'
+import { useSelect, useDispatch } from 'store/hooks'
+import { showModal as showModalAction } from 'store/ui/actions'
 
 type GraphProps = {
   experience: IExperience;
 };
 
 const Graph = ({ experience }: GraphProps) => {
-  const showModal = useDispatchShowModal()
+  const showModal = useDispatch(showModalAction())
 
   const handleClick = (event: MouseEvent) => {
     event.preventDefault()
@@ -58,7 +44,7 @@ const EmptyState = () => (
 )
 
 const GraphWrapper = () => {
-  const experience = getSelectedExperience()
+  const experience = useSelect(getSelectedExperience)
 
   if (!experience) return <EmptyState />
   return <Graph experience={experience} />

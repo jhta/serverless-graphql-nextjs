@@ -1,27 +1,16 @@
-import { useContext } from 'react'
 import { IExperience } from '../../interfaces/Experience'
-import Store from 'store'
-import { EXPERIENCES_ACTION_NAMES } from 'store/experiences/types';
 import { formatDate } from './utils'
 import styles from './listItem.module.css'
+import * as actions from 'store/experiences/actions'
+import { useDispatch } from 'store/hooks'
 
 type ItemProps = {
   experience: IExperience
 }
 
-const useSetExperience = (selectedExperience: IExperience | undefined) => {
-  const store = useContext(Store);
-
-  return () => store.dispatch({
-    type: EXPERIENCES_ACTION_NAMES.SET_SELECTED_EXPERIENCE,
-    payload: {
-      selectedExperience,
-    }
-  })
-}
-
 const Item = ({ experience }: ItemProps) => {
-  const setExperience = useSetExperience(experience)
+  const action = actions.setExperience({ selectedExperience: experience })
+  const setExperience = useDispatch(action)
   const { createdAt, description } = experience 
   const handleCickItem = (e: any) => {
     e.preventDefault()
