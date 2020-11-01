@@ -7,6 +7,7 @@ import StoreProvider from 'store/Provider'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from 'lib/apollo-client'
 import 'styles/global.css'
+import 'react-input-range/lib/css/index.css'
 
 type AppProps = {
   Component: NextComponentType<NextPageContext>

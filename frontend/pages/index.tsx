@@ -6,6 +6,7 @@ import Graph from "components/graph";
 import List from 'components/list'
 import { TState } from 'store';
 import Modal from 'components/modal'
+import Form from 'components/form'
 
 type IndexProps = {
   experiences: IExperience[];
@@ -20,7 +21,9 @@ const Index: NextPage<IndexProps> = ({ experiences }) => {
         <List experiences={experiences} />
         <Graph />
       </div>
-      <Modal />
+      <Modal>
+        <Form />
+      </Modal>
     </div>
   );
 };
