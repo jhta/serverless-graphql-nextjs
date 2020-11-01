@@ -1,43 +1,17 @@
-
-import React, { MouseEvent, useState } from 'react'
-import { useMutation } from '@apollo/client';
+import React, { ChangeEvent, MouseEvent, useState } from 'react'
 import InputRange from 'react-input-range';
 import Button from 'components/button'
 import styles from './form.module.css'
 import { getEmoji } from 'lib/emoji'
 
-import { postExperienceMutation } from 'services/experiences/mutations';
 import { ILabels } from 'interfaces/Experience';
-import { useDispatch } from 'store/hooks'
-import { addExperience as createAddExperience} from 'store/experiences/actions'
-
-
-const initialLabels: ILabels = {
-  money: 5,
-  spirituality: 5,
-  health: 5,
-  career: 5,
-  love: 5,
-  social: 5,
-  hobbies: 5,
-  growth: 5,
-}
-
-function useLabelsForm() {
-  const [value, setValue] = useState(initialLabels)
-
-  const setByLabel = (label: keyof ILabels, labelValue: number) => setValue({
-    ...value,
-    [label]: labelValue
-  })
-  return { value, setByLabel }
-}
-
+import { usePostExperience, useLabelsForm } from './hooks'
+import { initialLabels } from './utils'
 
 const Form = () => {
-  const [postExp, { loading, called }] = useMutation(postExperienceMutation)
   const { value: labels, setByLabel } = useLabelsForm()
-  const addExperience = useDispatch(createAddExperience)
+  const { loading, postExperience } = usePostExperience()
+  const [description, setDescription] = useState('')
 
   const labelKeys = Object.keys(initialLabels)
 
@@ -46,22 +20,15 @@ const Form = () => {
 
     const input = {
       userId: '123',
-      description: 'hellooooooo',
+      description,
       labels
     }
+    postExperience(input)
+  }
 
-    await postExp({
-      variables: {
-        input 
-      }
-    })
-
-    const experience = {
-      ...input,
-      createdAt: new Date().getTime() + ''
-    }
-
-    addExperience({ experience })
+  const handleInputDescription = (event: any) => {
+    const { target: { value }} = event
+    setDescription(value)
   }
 
   return (
@@ -80,6 +47,10 @@ const Form = () => {
           </div>
           ))
         }
+      <div className={styles.inputGroup}>
+        <h3 className={styles.label}>Description (optional)</h3>
+        <textarea className={styles.input} value={description} onChange={handleInputDescription} />
+      </div>
       <Button
         onClick={handleCreateExperience}
       >
