@@ -20,16 +20,18 @@ type TActions = TActionMap<
 >
 
 export const actions: TActions = {
-  [EXPERIENCES_ACTION_NAMES.SET_SELECTED_EXPERIENCE]: (
-    state,
-    { payload: { selectedExperience } }
-  ) => ({
-    ...state,
-    selectedExperience,
-  }),
+  [EXPERIENCES_ACTION_NAMES.SET_SELECTED_EXPERIENCE]: (state, action) => {
+    const {
+      payload: { selectedExperience },
+    }: any = action
+    return {
+      ...state,
+      selectedExperience,
+    }
+  },
   [EXPERIENCES_ACTION_NAMES.ADD_EXPERIENCE]: (
     state,
-    { payload: { experience } }
+    { payload: { experience } }: any
   ) => ({
     ...state,
     experiences: [experience, ...state.experiences],

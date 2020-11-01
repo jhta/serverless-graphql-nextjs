@@ -1,20 +1,22 @@
-
-
 import React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/client'
+import GoogleButton from 'components/google-button'
+
 
 export default function Page() {
   const [ session ] = useSession()
+  console.log('this is the sessin', session)
 
 
-  return <>
+  return <div className="container">
+    <h1>Welcome Gonorrea</h1>
     {!session && <>
       Not signed in <br/>
-      <button onClick={(e) => { e.preventDefault(); signIn() }}>Sign in</button>
+      <GoogleButton onClick={(e) => { e.preventDefault(); signIn('google') }}>Sign in</GoogleButton>
     </>}
     {session && <>
       Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
+      <GoogleButton onClick={() => signOut()}>Sign out</GoogleButton>
     </>}
-  </>
+  </div>
 }

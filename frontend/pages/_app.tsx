@@ -2,7 +2,7 @@ import { NextComponentType, NextPageContext } from 'next';
 import App from 'next/app';
 import { Router } from 'next/dist/client/router';
 import React from 'react';
-import { Provider } from 'next-auth/client';
+import { Provider as AuthProvider } from 'next-auth/client';
 import StoreProvider from 'store/Provider'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from 'lib/apollo-client'
@@ -21,15 +21,14 @@ export class CustomApp extends App<AppProps> {
     const { Component, pageProps } = this.props;
       const { session, initialState } = pageProps;
 
-      console.log('initital', initialState)
     return (
       <StoreProvider initialState={initialState}>
         <ApolloProvider client={apolloClient}>
-          <Provider session={session}>
+          <AuthProvider session={session}>
             <div className='wrapper'>
               <Component {...pageProps} />
             </div>
-        </Provider>
+        </AuthProvider>
         </ApolloProvider>
       </StoreProvider>
     );
