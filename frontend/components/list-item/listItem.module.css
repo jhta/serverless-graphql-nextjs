@@ -9,7 +9,7 @@
 
 .itemSelected {
   composes: item;
-  border: 1px solid #4dbfbf;
+  border: 2px solid #4dbfbf;
 }
 
 .date {

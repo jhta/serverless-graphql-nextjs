@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactModal from 'react-modal'
-
+import styles from './modal.module.css'
 
 import { isOpenModal } from 'store/selectors'
 import { hideModal as hideModalAction } from 'store/ui/actions'
@@ -17,7 +17,12 @@ const Modal = ({ children }: any) => {
   }
 
   return (
-    <ReactModal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
+    <ReactModal
+      isOpen={isModalOpen}
+      onRequestClose={handleCloseModal}
+      className={styles.modal}
+      overlayClassName={styles.overlay}
+    >
       { children }
     </ReactModal>
   )

@@ -6,6 +6,7 @@ html {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background: #ffe194;
+  overflow: hidden;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
 
 h1,
 h2,
+h3,
 p {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -34,7 +36,8 @@ ul {
   border: 1px solid green;
   max-width: 1280px;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: calc(100vh - 3rem);
   margin: 0 auto;
   display: flex;
   position: relative;

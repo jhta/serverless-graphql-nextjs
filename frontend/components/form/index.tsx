@@ -2,7 +2,9 @@
 import React, { MouseEvent, useState } from 'react'
 import { useMutation } from '@apollo/client';
 import InputRange from 'react-input-range';
+import Button from 'components/button'
 import styles from './form.module.css'
+import { getEmoji } from 'lib/emoji'
 
 import { postExperienceMutation } from 'services/experiences/mutations';
 import { ILabels } from 'interfaces/Experience';
@@ -13,15 +15,15 @@ const input = {
 }
 
 const initialLabels: ILabels = {
-    money: 5,
-    spirituality: 5,
-    health: 5,
-    career: 5,
-    love: 5,
-    social: 5,
-    hobbies: 5,
-    growth: 5,
-  }
+  money: 5,
+  spirituality: 5,
+  health: 5,
+  career: 5,
+  love: 5,
+  social: 5,
+  hobbies: 5,
+  growth: 5,
+}
 
 function useLabelsForm() {
   const [value, setValue] = useState(initialLabels)
@@ -57,6 +59,7 @@ const Form = () => {
         {
         labelKeys.map((label: keyof ILabels, index) => (
           <div key={index} className={styles.inputRange}>
+            <h3 className={styles.label}>{ `${label} ${getEmoji(label)}`}</h3>
             <InputRange
               maxValue={10}
               minValue={0}
@@ -66,7 +69,7 @@ const Form = () => {
           </div>
           ))
         }
-        <button onClick={handleCreateExperience}>Create</button>
+        <Button onClick={handleCreateExperience}>Create</Button>
       </div>
   )
 }

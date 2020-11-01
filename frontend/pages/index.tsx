@@ -32,7 +32,7 @@ Index.getInitialProps = async (): Promise<IndexProps> => {
   try {
     const { data: experiences, error } = await fetchExperiences();
     const lastExperience = experiences.length
-      ? experiences[experiences.length - 1]
+      ? experiences[0]
       : undefined;
     return {
       experiences,

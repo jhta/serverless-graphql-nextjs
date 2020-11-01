@@ -30,6 +30,7 @@ const Graph = ({ experience }: GraphProps) => {
           type="polar-area"
         />
       </div>
+      <div className={styles.description}>{ `"${experience.description}"` }</div>
       <div className={styles.graphBottom}>
         <Button onClick={handleClick}>Create experience</Button>
       </div>
