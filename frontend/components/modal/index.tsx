@@ -3,14 +3,14 @@ import ReactModal from 'react-modal'
 import styles from './modal.module.css'
 
 import { isOpenModal } from 'store/selectors'
-import { hideModal as hideModalAction } from 'store/ui/actions'
+import { hideModal as hideModalCreator } from 'store/ui/actions'
 import { useSelect, useDispatch } from 'store/hooks'
 
 ReactModal.setAppElement('#modal')
 
 const Modal = ({ children }: any) => {
   const isModalOpen = useSelect(isOpenModal)
-  const hideModal = useDispatch(hideModalAction())
+  const hideModal = useDispatch(hideModalCreator)
 
   const handleCloseModal = () => {
     hideModal()

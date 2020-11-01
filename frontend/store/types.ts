@@ -1,6 +1,6 @@
 export type TAction<T, P> = {
   type: T
-  payload?: P
+  payload: P
 }
 
 export type TReducer<T, S, P> = (state: S, action: TAction<T, P>) => S

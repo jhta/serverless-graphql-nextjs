@@ -3,19 +3,23 @@ import {
   EXPERIENCES_ACTION_NAMES,
   TExperiencesState,
   TExperiencesPayloads,
+  // TSetSelectedExperiencePayload,
 } from './types'
 
 export const namespace = 'experiences'
 
 export const initialState: TExperiencesState = {
   selectedExperience: undefined,
+  experiences: [],
 }
 
-export const actions: TActionMap<
+type TActions = TActionMap<
   EXPERIENCES_ACTION_NAMES,
   TExperiencesState,
   TExperiencesPayloads
-> = {
+>
+
+export const actions: TActions = {
   [EXPERIENCES_ACTION_NAMES.SET_SELECTED_EXPERIENCE]: (
     state,
     { payload: { selectedExperience } }
@@ -23,11 +27,20 @@ export const actions: TActionMap<
     ...state,
     selectedExperience,
   }),
+  [EXPERIENCES_ACTION_NAMES.ADD_EXPERIENCE]: (
+    state,
+    { payload: { experience } }
+  ) => ({
+    ...state,
+    experiences: [experience, ...state.experiences],
+  }),
 }
 
-export const reducers: TReducer<
+type TExperienceReducer = TReducer<
   EXPERIENCES_ACTION_NAMES,
   TExperiencesState,
   TExperiencesPayloads
-> = (state = initialState, action) =>
+>
+
+export const reducers: TExperienceReducer = (state = initialState, action) =>
   actions[action.type] ? actions[action.type](state, action) : state

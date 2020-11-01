@@ -7,8 +7,10 @@ export function useSelect(selector: TSelector<TState>) {
   return selector(state)
 }
 
-export const useDispatch = (action: TAction<TActionNames, TActionPayloads>) => {
+export const useDispatch = (
+  action: (payload?: TActionPayloads) => TAction<TActionNames, TActionPayloads>
+) => {
   const { dispatch } = React.useContext(Store)
 
-  return () => dispatch(action)
+  return (payload?: TActionPayloads) => dispatch(action(payload))
 }

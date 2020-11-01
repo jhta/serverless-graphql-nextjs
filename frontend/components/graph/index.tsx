@@ -14,7 +14,7 @@ type GraphProps = {
 };
 
 const Graph = ({ experience }: GraphProps) => {
-  const showModal = useDispatch(showModalAction())
+  const showModal = useDispatch(showModalAction)
 
   const handleClick = (event: MouseEvent) => {
     event.preventDefault()

@@ -9,16 +9,15 @@ import Modal from 'components/modal'
 import Form from 'components/form'
 
 type IndexProps = {
-  experiences: IExperience[];
   error: [];
   initialState?: TState
 };
 
-const Index: NextPage<IndexProps> = ({ experiences }) => {
+const Index: NextPage<IndexProps> = () => {
   return (
     <div>
       <div className="container">
-        <List experiences={experiences} />
+        <List />
         <Graph />
       </div>
       <Modal>
@@ -34,22 +33,24 @@ Index.getInitialProps = async (): Promise<IndexProps> => {
     const lastExperience = experiences.length
       ? experiences[0]
       : undefined;
-    return {
-      experiences,
-      error,
-      initialState: {
-        experiences: {
-          selectedExperience: lastExperience,
-        },
-        ui: {
-          modalIsOpen: false,
-        }
+    
+    const initialState = {
+      experiences: {
+        selectedExperience: lastExperience,
+        experiences,
+      },
+      ui: {
+        modalIsOpen: false,
       }
+    }
+
+    return {
+      error,
+      initialState,
     };
   } catch (error) {
     console.log("this is the error", error);
     return {
-      experiences: [],
       error
     };
   }

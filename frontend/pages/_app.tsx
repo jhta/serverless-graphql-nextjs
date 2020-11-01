@@ -21,6 +21,7 @@ export class CustomApp extends App<AppProps> {
     const { Component, pageProps } = this.props;
       const { session, initialState } = pageProps;
 
+      console.log('initital', initialState)
     return (
       <StoreProvider initialState={initialState}>
         <ApolloProvider client={apolloClient}>

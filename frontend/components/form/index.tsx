@@ -8,11 +8,9 @@ import { getEmoji } from 'lib/emoji'
 
 import { postExperienceMutation } from 'services/experiences/mutations';
 import { ILabels } from 'interfaces/Experience';
+import { useDispatch } from 'store/hooks'
+import { addExperience as createAddExperience} from 'store/experiences/actions'
 
-const input = {
-  userId: 123,
-  description: 'This is a nice number',
-}
 
 const initialLabels: ILabels = {
   money: 5,
@@ -37,20 +35,33 @@ function useLabelsForm() {
 
 
 const Form = () => {
-  const [postExp, data] = useMutation(postExperienceMutation)
+  const [postExp, { loading, called }] = useMutation(postExperienceMutation)
   const { value: labels, setByLabel } = useLabelsForm()
+  const addExperience = useDispatch(createAddExperience)
 
   const labelKeys = Object.keys(initialLabels)
 
   const handleCreateExperience = async (e: MouseEvent) => {
     e.preventDefault()
+
+    const input = {
+      userId: '123',
+      description: 'hellooooooo',
+      labels
+    }
+
     await postExp({
       variables: {
-        input: {
-          ...input,
-          labels,
-      } }
+        input 
+      }
     })
+
+    const experience = {
+      ...input,
+      createdAt: new Date().getTime() + ''
+    }
+
+    addExperience({ experience })
   }
 
   return (
@@ -69,7 +80,11 @@ const Form = () => {
           </div>
           ))
         }
-        <Button onClick={handleCreateExperience}>Create</Button>
+      <Button
+        onClick={handleCreateExperience}
+      >
+        {loading ? 'Loading...' : 'Create'}
+      </Button>
       </div>
   )
 }
