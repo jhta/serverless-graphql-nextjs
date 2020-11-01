@@ -1,7 +1,8 @@
 import React from "react";
 import { PolarArea } from "@reactchartjs/react-chart.js";
 import { IExperience } from "interfaces/Experience";
-import { createData } from './utils'
+import Button from 'components/button'
+import { createData, graphOptions } from './utils'
 import styles from './graph.module.css'
 
 import Store from 'store'
@@ -12,38 +13,36 @@ const getSelectedExperience = () => {
   
 }
 
-const options = {
-  scale: {
-    ticks: { beginAtZero: true }
-  }
-};
-
 type GraphProps = {
-  experience?: IExperience;
+  experience: IExperience;
 };
 
-const Graph = () => {
-  const experience = getSelectedExperience()
-  return (
-    <>
-      {experience && (
-        <div className={styles.graph}>
-          <PolarArea
-            data={createData(experience)}
-            options={options}
-            type="polar-area"
-          />
-        </div>
-      )}
-      <EmptyState isEmpty={!experience} />
-    </>
-  )
-};
+const Graph = ({ experience }: GraphProps) => (
+  <div className={styles.graphWrapper}>
+    <div className={styles.graph}>
+      <PolarArea
+        data={createData(experience)}
+        options={graphOptions}
+        type="polar-area"
+      />
+    </div>
+    <div className={styles.graphBottom}>
+      <Button>Create experience</Button> 
+    </div>
+  </div>
+)
 
-const EmptyState = ({ isEmpty }: { isEmpty: boolean}) => !isEmpty? null : (
+const EmptyState = () => (
   <div className={styles.empty}>
     There is not experiences yet, created the first one :)
   </div>
 )
 
-export default Graph;
+const GraphWrapper = () => {
+  const experience = getSelectedExperience()
+
+  if (!experience) return <EmptyState />
+  return <Graph experience={experience} />
+};
+
+export default GraphWrapper;

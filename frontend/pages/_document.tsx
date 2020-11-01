@@ -20,6 +20,7 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
         </body>
+        <div id="modal" />
       </Html>
     );
   }

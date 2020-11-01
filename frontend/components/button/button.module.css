@@ -1,0 +1,16 @@
+.button {
+  padding: 1rem 2rem;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: white;
+  background: #4dbfbf;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.button:active {
+  transform: scale(1.03);
+}
