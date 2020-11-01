@@ -4,7 +4,7 @@ import { fetchExperiences } from "services/experiences";
 import { IExperience } from "interfaces/Experience";
 import Graph from "components/graph";
 import List from 'components/list'
-import { TState } from 'store/types';
+import { TState } from 'store';
 import Modal from 'components/modal'
 
 type IndexProps = {
@@ -35,7 +35,12 @@ Index.getInitialProps = async (): Promise<IndexProps> => {
       experiences,
       error,
       initialState: {
-        selectedExperience: lastExperience,
+        experiences: {
+          selectedExperience: lastExperience,
+        },
+        ui: {
+          modalIsOpen: false,
+        }
       }
     };
   } catch (error) {

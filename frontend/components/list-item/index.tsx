@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { IExperience } from '../../interfaces/Experience'
 import Store from 'store'
-import { ACTION_NAMES } from 'store/types';
+import { EXPERIENCES_ACTION_NAMES } from 'store/experiences/types';
 import { formatDate } from './utils'
 import styles from './listItem.module.css'
 
@@ -13,7 +13,7 @@ const useSetExperience = (selectedExperience: IExperience | undefined) => {
   const store = useContext(Store);
 
   return () => store.dispatch({
-    type: ACTION_NAMES.SET_SELECTED_EXPERIENCE,
+    type: EXPERIENCES_ACTION_NAMES.SET_SELECTED_EXPERIENCE,
     payload: {
       selectedExperience,
     }

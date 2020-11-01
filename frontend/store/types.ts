@@ -1,25 +1,15 @@
-import { IExperience } from 'interfaces/Experience'
-
-export enum ACTION_NAMES {
-  'SET_SELECTED_EXPERIENCE' = 'SET_SELECTED_EXPERIENCE',
+export type TAction<T, P> = {
+  type: T
+  payload: P
 }
 
-export type TState = {
-  selectedExperience?: IExperience
+export type TReducer<T, S, P> = (state: S, action: TAction<T, P>) => S
+
+export type TActionMap<T, S, P> = {
+  [key: string]: TReducer<T, S, P>
 }
 
-export type TAction<T> = {
-  type: ACTION_NAMES
-  payload: T
-}
-
-export type TReducer<T> = (state: TState, action: TAction<T>) => TState
-
-export type TActionMap<T> = {
-  [key: string]: TReducer<T>
-}
-
-export type TStore<T> = {
-  dispatch: (action: TAction<T>) => void
-  state: TState
+export type TStore<T, S, P> = {
+  dispatch: (action: TAction<T, P>) => void
+  state: S
 }

@@ -1,33 +1,49 @@
-import { IExperience } from 'interfaces/Experience'
 import { createContext } from 'react'
-import { TState, TActionMap, TStore, ACTION_NAMES, TReducer } from './types'
+import { TStore, TReducer, TAction } from './types'
+import { TUIPayloads, TUIState, UI_ACTION_NAMES } from './ui/types'
+import {
+  TExperiencesPayloads,
+  TExperiencesState,
+  EXPERIENCES_ACTION_NAMES,
+} from './experiences/types'
+
+import * as ui from './ui'
+import * as experiences from './experiences'
+
+export type TState = {
+  experiences: TExperiencesState
+  ui: TUIState
+}
 
 export const initialState: TState = {
-  selectedExperience: undefined,
+  ui: ui.initialState,
+  experiences: experiences.initialState,
 }
 
-type TSetSelectedExperiencePayload = {
-  selectedExperience: IExperience | undefined
+const reducers = {
+  ui: ui.reducers,
+  experiences: experiences.reducers,
 }
 
-type TPayloads = TSetSelectedExperiencePayload
+// export type TMainStore = TStore<TPayloai
+type TActionNames = UI_ACTION_NAMES | EXPERIENCES_ACTION_NAMES
+type TActionPayloads = TUIPayloads | TExperiencesPayloads
 
-const actions: TActionMap<TPayloads> = {
-  [ACTION_NAMES.SET_SELECTED_EXPERIENCE]: (
-    state,
-    { payload: { selectedExperience } }
-  ) => ({
-    ...state,
-    selectedExperience,
-  }),
-}
+// type TCombinedAction = TAction<TActionNames, TActionPayloads>
 
-export type TMainStore = TStore<TPayloads>
+const combineReducers = (reducers: any) => (state: any, action: any) =>
+  Object.keys(reducers).reduce(
+    // use for..in loop, if you prefer it
+    (acc, prop) => ({
+      ...acc,
+      [prop]: reducers[prop](acc[prop], action),
+    }),
+    state
+  )
 
-export const reducer: TReducer<TPayloads> = (state = initialState, action) =>
-  actions[action.type] ? actions[action.type](state, action) : state
+export const reducer = combineReducers(reducers)
 
-const Store = createContext<TStore<TPayloads>>({
+const Store = createContext<TStore<TActionNames, TState, TActionPayloads>>({
   dispatch: () => {},
   state: initialState,
 })

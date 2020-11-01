@@ -1,6 +1,5 @@
 import { useReducer } from 'react'
-import Store, { reducer, initialState } from './index' 
-import { TState } from './types'
+import Store, { reducer, initialState, TState } from './index' 
 
 type TStoreProviderProps = {
   children: any 
