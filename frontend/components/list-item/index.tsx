@@ -2,16 +2,20 @@ import { IExperience } from '../../interfaces/Experience'
 import { formatDate } from './utils'
 import styles from './listItem.module.css'
 import * as actions from 'store/experiences/actions'
-import { useDispatch } from 'store/hooks'
+import { useDispatch, useSelect } from 'store/hooks'
+import { isSelectedCreator } from 'store/selectors'
 
 type ItemProps = {
   experience: IExperience
 }
 
 const Item = ({ experience }: ItemProps) => {
+  const { createdAt, description } = experience 
+  const isSelected = useSelect(isSelectedCreator(createdAt))
+
   const action = actions.setExperience({ selectedExperience: experience })
   const setExperience = useDispatch(action)
-  const { createdAt, description } = experience 
+
   const handleCickItem = (e: any) => {
     e.preventDefault()
     setExperience()
@@ -20,7 +24,7 @@ const Item = ({ experience }: ItemProps) => {
   return (
     <>
       <li
-        className={styles.item}
+        className={isSelected ? styles.itemSelected : styles.item}
         onClick={handleCickItem}>
         <p className={styles.description}>{description}</p>
         <span className={styles.date}>{formatDate(createdAt)}</span>

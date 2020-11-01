@@ -7,6 +7,11 @@
   box-shadow: -1px 1px 2px #0000002e;
 }
 
+.itemSelected {
+  composes: item;
+  border: 1px solid #4dbfbf;
+}
+
 .date {
   font-size: 14px;
   color: #aaa;
