@@ -1,7 +1,6 @@
 import React from 'react'
 import { NextPage } from "next";
 import { fetchExperiences } from "services/experiences";
-import { IExperience } from "interfaces/Experience";
 import Graph from "components/graph";
 import List from 'components/list'
 import { TState } from 'store';

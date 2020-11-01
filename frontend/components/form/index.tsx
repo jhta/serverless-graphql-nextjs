@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import InputRange from 'react-input-range';
 import Button from 'components/button'
 import styles from './form.module.css'
