@@ -1,0 +1,30 @@
+.navbar {
+  border: 1px solid red;
+  height: 4rem;
+  width: 100%;
+}
+
+.logoutButtonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.logoutButton {
+  border: 1px solid red;
+  padding: 1rem;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.logoutButton:hover {
+  background: #ffffff45;
+  text-decoration: underline;
+}
+
+.img {
+  height: 40px;
+  border-radius: 50%;
+  padding-left: 0.5rem;
+}

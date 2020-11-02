@@ -1,11 +1,23 @@
 import React from 'react'
-import { NextPage } from "next";
+import Router from "next/router";
+import { NextPage, NextPageContext } from "next";
 import { fetchExperiences } from "services/experiences";
 import Graph from "components/graph";
 import List from 'components/list'
 import { TState } from 'store';
 import Modal from 'components/modal'
 import Form from 'components/form'
+import { getSession } from 'next-auth/client'
+
+export function redirectUser({ req, res}: NextPageContext, location: string) {
+  if (req && res) {
+    res.writeHead(302, { Location: location });
+    res.end();
+  } else {
+    Router.push(location);
+  }
+  return null
+}
 
 type IndexProps = {
   error: [];
@@ -26,9 +38,30 @@ const Index: NextPage<IndexProps> = () => {
   );
 };
 
-Index.getInitialProps = async (): Promise<IndexProps> => {
+const initialStore = {
+  experiences: {
+    selectedExperience: undefined,
+    experiences: [],
+  },
+  ui: {
+    modalIsOpen: false,
+  }
+}
+
+
+Index.getInitialProps = async (ctx): Promise<IndexProps> => {
   try {
-    const { data: experiences, error } = await fetchExperiences();
+    const session = await getSession(ctx)
+    if (!session) {
+      redirectUser(ctx, '/login')
+      return {
+        error: [],
+        initialState: initialStore,
+      }
+    }
+    const { user: { email } } = session
+
+    const { data: experiences, error } = await fetchExperiences(email);
     const lastExperience = experiences.length
       ? experiences[0]
       : undefined;

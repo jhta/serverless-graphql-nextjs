@@ -12,4 +12,9 @@ export const isOpenModal: TSelector<TState> = (state) => state.ui.modalIsOpen
 
 export const isSelectedCreator = (createdAt: string): TSelector<TState> => (
   state
-) => getSelectedExperience(state).createdAt === createdAt
+) => {
+  const experience = getSelectedExperience(state)
+  if (!experience) return false
+
+  return experience.createdAt === createdAt
+}

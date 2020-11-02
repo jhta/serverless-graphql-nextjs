@@ -1,11 +1,16 @@
 .empty {
   height: 100%;
   flex: 1;
+  flex-direction: column;
   border: 1px solid red;
   min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.emptyText {
+  font-size: 24px;
 }
 
 .graph {

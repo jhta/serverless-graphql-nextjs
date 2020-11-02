@@ -10,16 +10,11 @@ import { useSelect, useDispatch } from 'store/hooks'
 import { showModal as showModalAction } from 'store/ui/actions'
 
 type GraphProps = {
-  experience: IExperience;
+  experience: IExperience
+  handleShowModal: Function
 };
 
-const Graph = ({ experience }: GraphProps) => {
-  const showModal = useDispatch(showModalAction)
-
-  const handleClick = (event: MouseEvent) => {
-    event.preventDefault()
-    showModal()
-  }
+const Graph = ({ experience, handleShowModal }: GraphProps) => {
 
   return (
     <div className={styles.graphWrapper}>
@@ -32,23 +27,40 @@ const Graph = ({ experience }: GraphProps) => {
       </div>
       <div className={styles.description}>{ `"${experience.description}"` }</div>
       <div className={styles.graphBottom}>
-        <Button onClick={handleClick}>Create experience</Button>
+        <Button onClick={handleShowModal}>Create experience</Button>
       </div>
     </div>
   )
 }
 
-const EmptyState = () => (
+const EmptyState = ({ handleShowModal }: any) => (
   <div className={styles.empty}>
-    There is not experiences yet, created the first one :)
+    <p className={styles.emptyText}>There is not experiences yet, created the first one :)</p>
+    <div className={styles.graphBottom}>
+        <Button onClick={handleShowModal}>Create experience</Button>
+      </div>
   </div>
 )
 
 const GraphWrapper = () => {
   const experience = useSelect(getSelectedExperience)
+  const showModal = useDispatch(showModalAction)
 
-  if (!experience) return <EmptyState />
-  return <Graph experience={experience} />
+  const handleShowModal = (event: MouseEvent) => {
+    event.preventDefault()
+    showModal()
+  }
+
+  if (!experience) return (
+    <EmptyState
+      handleShowModal={handleShowModal}
+    />
+  )
+
+  return <Graph
+    handleShowModal={handleShowModal}
+    experience={experience}
+  />
 };
 
 export default GraphWrapper;

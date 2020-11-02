@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
+import { useSession } from 'next-auth/client'
+
 import { postExperienceMutation } from 'services/experiences/mutations'
 import { ILabels } from 'interfaces/Experience'
+
 import { useDispatch } from 'store/hooks'
 import { addExperience as createAddExperience } from 'store/experiences/actions'
 import { hideModal as hideModalCreator } from 'store/ui/actions'
+
 import { initialLabels } from './utils'
 
 export function useLabelsForm() {
@@ -22,11 +26,20 @@ export function usePostExperience() {
   const [postExp, { loading, called }] = useMutation(postExperienceMutation)
   const addExperience = useDispatch(createAddExperience)
   const hideModal = useDispatch(hideModalCreator)
+  const [session] = useSession()
 
   const postExperience = async (input: any) => {
+    if (!session) return
+
+    const {
+      user: { email },
+    } = session
     await postExp({
       variables: {
-        input,
+        input: {
+          ...input,
+          userId: email,
+        },
       },
     })
 

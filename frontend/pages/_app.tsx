@@ -8,6 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from 'lib/apollo-client'
 import 'styles/global.css'
 import 'react-input-range/lib/css/index.css'
+import Navbar from 'components/navbar'
 
 type AppProps = {
   Component: NextComponentType<NextPageContext>
@@ -26,6 +27,7 @@ export class CustomApp extends App<AppProps> {
         <ApolloProvider client={apolloClient}>
           <AuthProvider session={session}>
             <div className='wrapper'>
+              <Navbar />
               <Component {...pageProps} />
             </div>
         </AuthProvider>

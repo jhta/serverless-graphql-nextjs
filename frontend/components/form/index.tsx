@@ -19,7 +19,6 @@ const Form = () => {
     e.preventDefault()
 
     const input = {
-      userId: '123',
       description,
       labels
     }
@@ -32,31 +31,35 @@ const Form = () => {
   }
 
   return (
-      <div className={styles.form}>
-        <h1 className={styles.title}>Create new experience</h1>
-        {
-        labelKeys.map((label: keyof ILabels, index) => (
-          <div key={index} className={styles.inputRange}>
-            <h3 className={styles.label}>{ `${label} ${getEmoji(label)}`}</h3>
-            <InputRange
-              maxValue={10}
-              minValue={0}
-              value={labels[label]}
-              onChange={(v) => { setByLabel(label, v as number) }}
-            />
-          </div>
-          ))
-        }
+    <div className={styles.form}>
+      <h1 className={styles.title}>Create new experience</h1>
+      {
+      labelKeys.map((label: keyof ILabels, index) => (
+        <div key={index} className={styles.inputRange}>
+          <h3 className={styles.label}>{ `${label} ${getEmoji(label)}`}</h3>
+          <InputRange
+            maxValue={10}
+            minValue={0}
+            value={labels[label]}
+            onChange={(v) => { setByLabel(label, v as number) }}
+          />
+        </div>
+        ))
+      }
       <div className={styles.inputGroup}>
         <h3 className={styles.label}>Description (optional)</h3>
-        <textarea className={styles.input} value={description} onChange={handleInputDescription} />
+        <textarea
+          className={styles.input}
+          value={description}
+          onChange={handleInputDescription}
+        />
       </div>
       <Button
         onClick={handleCreateExperience}
       >
         {loading ? 'Loading...' : 'Create'}
       </Button>
-      </div>
+    </div>
   )
 }
 
