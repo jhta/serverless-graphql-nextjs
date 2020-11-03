@@ -1,12 +1,17 @@
+// https://github.com/nextauthjs/next-auth/issues/591
 import React from 'react'
+// import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/client'
 import GoogleButton from 'components/google-button'
 import styles from './loginPage.module.css'
 
 const LoginPage = () => {
+  // const { query } = useRouter()
   const [ session ] = useSession()
+
+
   const handleLogin = () => {
-    signIn('google', { callbackUrl: '/' })
+    signIn('google', { callbackUrl: `/` })
   }
 
   return (

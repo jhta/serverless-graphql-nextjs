@@ -19,8 +19,7 @@ function omitTypename(key: string, value: any): undefined | any {
   return key === '__typename' ? undefined : value
 }
 
-const endpoint =
-  'https://u7wg795908.execute-api.eu-west-1.amazonaws.com/dev/graphql'
+const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT
 
 const httpLink = createHttpLink({ uri: endpoint })
 const errorLink = onError(({ networkError }) => {
