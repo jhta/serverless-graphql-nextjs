@@ -1,0 +1,28 @@
+.button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  border: 3px solid #bbb;
+  border-radius: 15px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.button:hover {
+  border: 3px solid black;
+}
+
+.img {
+  width: 28px;
+  height: 28px;
+  margin-right: 2rem;
+}
+
+.textWrapper {
+  width: 100%;
+}
+
+.text {
+  font-size: 20px;
+}

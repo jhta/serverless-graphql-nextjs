@@ -3,5 +3,6 @@
   height: calc(100% - 3rem);
   overflow: auto;
   padding: 1rem;
+  padding-top: 2rem;
   padding-left: 0;
 }

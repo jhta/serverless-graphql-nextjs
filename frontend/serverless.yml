@@ -14,7 +14,6 @@ myNextApp:
         NEXTAUTH_URL: https://d2p83q9loxtgqc.cloudfront.net
     cloudfront:
       distributionId: E3GAWAZV70QHT5
-      # the origin-request edge lambda associated to this cache behaviour does the pages server side rendering
       defaults:
         forward:
           headers:

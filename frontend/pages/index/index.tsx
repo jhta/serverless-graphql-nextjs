@@ -2,6 +2,7 @@ import React from 'react'
 import Router from "next/router";
 import { NextPage, NextPageContext } from "next";
 import { fetchExperiences } from "services/experiences";
+import Navbar from 'components/navbar'
 import Graph from "components/graph";
 import List from 'components/list'
 import { TState } from 'store';
@@ -27,6 +28,7 @@ type IndexProps = {
 const Index: NextPage<IndexProps> = () => {
   return (
     <div>
+      <Navbar />
       <div className="container">
         <List />
         <Graph />

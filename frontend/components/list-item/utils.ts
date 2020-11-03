@@ -8,6 +8,6 @@ export const formatDate = (createdAt: string): string =>
 export const formatLabel = (labels: ILabels) => {
   return Object.entries(labels).reduce((acc, [label, value]) => {
     if (label === '__typename') return acc
-    return `${acc} ${getEmoji(label as keyof ILabels)}: ${value} `
+    return `${acc} ${value} ${getEmoji(label as keyof ILabels)}`
   }, '')
 }
